@@ -1,7 +1,7 @@
 (() => {
     const API_URL = 'https://glen-hexagonal-microraptor.glitch.me/movies';
     $(document).ready(function () {
-    // CREATING A MOVIE
+        // CREATING A MOVIE
         $('#moviebtn').click(function (e) {
             e.preventDefault();
             if ($('#title').val() === '') {
@@ -38,10 +38,13 @@
             return fetch(API_URL, options).then(resp => resp.json()).catch(err => console.error(err));
         }
 
-        // $('.moviecard').click(function (e) {
-        //     console.log('it works!')
-        // })
+
         // EDIT MOVIE FUNCTIONALITY
+
+        $('#editmoviebtn').click(function () {
+            editMovie(this.value).then(data => console.log(data))
+        })
+
         const editMovie = (movie) => {
             let options = {
                 method: 'PUT',
@@ -52,6 +55,5 @@
             }
             return fetch(`${API_URL}/${movie.id}`, options).then(resp => resp.json()).catch(err => console.error(err));
         }
-
     })
 })();
