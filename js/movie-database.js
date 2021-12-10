@@ -11,6 +11,7 @@
             console.log(movie.title)
             let id = movie.id;
             let output =
+
                 `<div>
                     <div class="card" style="width: 18rem;">
                         <img src="${movie.poster}" height="250" class="card-img-top" alt="...">
