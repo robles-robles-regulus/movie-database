@@ -1,9 +1,13 @@
 #form {
-    background-color: red;
+    background-color: darkslategrey;
     height: 700px;
 }
 
 #movies {
-    background-color: yellow;
+    background-color: darkslateblue;
     height: 700px;
+}
+
+.movieform {
+    height: 30px; !important;
 }
