@@ -10,7 +10,7 @@
         for (let movie of response) {
             console.log(movie.title)
             let output =
-                `<div>
+                `<div class="moviecard">
 <div class="card" style="width: 18rem;">
             <img src="${movie.poster}" height="250" class="card-img-top" alt="...">
             <div class="card-body">
