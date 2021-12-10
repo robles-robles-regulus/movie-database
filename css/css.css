@@ -1,3 +1,9 @@
 #form {
     background-color: red;
+    height: 700px;
+}
+
+#movies {
+    background-color: yellow;
+    height: 700px;
 }
