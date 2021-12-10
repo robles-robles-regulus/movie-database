@@ -1,11 +1,9 @@
 #form {
     background-color: darkslategrey;
-    height: 700px;
 }
 
-#movies {
+#movies-container {
     background-color: darkslateblue;
-    height: 700px;
 }
 
 .movieform {
