@@ -1,31 +1,34 @@
 "use strict";
 (() => {
-
+    const moviesList = document.querySelector('#movies-container');
+    const dropdownStatus = document.querySelector('#dropdownStatus');
+    let output = '';
     const renderMovies = (movies) => {
-      $('#spinner').toggleClass('hidden');
+        $('#spinner').addClass('hidden');
         for(let movie of movies){
             console.log(movie.title)
             let id = movie.id;
-            let output =
+            output +=
 
-                `<div>
-                    <div class="card" style="width: 18rem;">
+                `
+                    <div class="card mb-2 ml-2" style="width: 18rem;">
                         <img src="${movie.poster}" height="250" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title text-capitalize">${movie.title}</h5>
+                            <small class="text-muted">${movie.genre}</small>
                             <p class="card-text">${movie.plot}</p>
                         </div>
-                        <div>
+                        <div class="card-footer">
                             <span class="float-left">
                                 <button class="ml-2 mt-2 mb-2 justify-self-right bg-primary edit-btn" id="edit-movie" value="${id}">Edit</button>
                             </span>
                             <span class="float-right">
-                                <button class="mr-2 mt-2 mb-2 justify-self-right bg-danger delete-btn" id="delete-movie" value="${id}">Delete</button>
+                                <button class="mr-2 mt-2 mb-2 justify-self-right bg-danger delete-btn" id="delete-movie${id}" value="${id}">Delete</button>
                             </span>    
                         </div>
                     </div>
-                </div>`
-            $('#movies').append(output)
+                `
+            moviesList.innerHTML = output;
         }
         //CALLING THE DELETE BUTTON FUNCTION ONCE CLICKED ON DELETE-BTN
         $(".delete-btn").click(function (e) {
@@ -34,9 +37,10 @@
             deleteMovie(this.value).then(data => console.log(data))
         })
         //CALLING THE EDIT BUTTON FUNCTION - THIS FIRST FUNCTION IS THE ONE THAT FILLS OUT THE FORM
-        $('.edit-btn').click(function () {
+        $('.edit-btn').click(function (e) {
 
             getOneMovie(this.value).then(data => {
+                e.preventDefault();
                 console.log(data);
                 $('#title').val(data.title);
                 $('#rating').val(data.rating);
@@ -50,13 +54,13 @@
                 $('.added-details').toggleClass('hidden');
                 $('#createmoviebtn').toggleClass('hidden');
                 $('#editmoviebtn').toggleClass('hidden');
-                $('.edit-btn').toggleClass('hidden')
-
-            });
+                $('.card-footer').toggleClass('hidden');
+                dropdownStatus.innerHTML = 'EDIT MOVIE'
+            })
+                .catch((err) => {
+                    console.log(err);
+                });
         })
-            .catch((err) => {
-                console.log(err);
-            });
         //DELETE FUNCTION
         function deleteMovie(id) {
             let options = {
@@ -147,10 +151,11 @@
             },
             body: JSON.stringify(movie)
         }
-        $('.edit-btn').toggleClass('hidden');
         $('.added-details').toggleClass('hidden');
         $('#editmoviebtn').toggleClass('hidden');
         $('#createmoviebtn').toggleClass('hidden');
+        $('.card-footer').toggleClass('hidden');
+        dropdownStatus.innerHTML = 'ADD MOVIE'
         console.log(movie.id);
         return fetch(`${API_URL}/${movie.id}`,options).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.error(err))
 
