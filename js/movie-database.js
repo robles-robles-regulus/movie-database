@@ -1,14 +1,9 @@
 "use strict";
 (() => {
-    const API_URL = 'https://glen-hexagonal-microraptor.glitch.me/movies';
-    let getAllMovies = () => {
-        return fetch(API_URL).then(resp => resp.json()).catch(err => console.error(err));
-    }
 
-    getAllMovies().then(response => {
-        $('#spinner').toggleClass('hidden');
-        console.log(response);
-        for (let movie of response) {
+    const renderMovies = (movies) => {
+      $('#spinner').toggleClass('hidden');
+        for(let movie of movies){
             console.log(movie.title)
             let id = movie.id;
             let output =
@@ -17,14 +12,16 @@
                     <div class="card" style="width: 18rem;">
                         <img src="${movie.poster}" height="250" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title text-capatilize">${movie.title}</h5>
+                            <h5 class="card-title text-capitalize">${movie.title}</h5>
                             <p class="card-text">${movie.plot}</p>
                         </div>
-                        <div class="text-left">
-                            <button class="mt-2 mb-2 justify-self-right edit-btn" id="edit-btn-${id}" value="${id}">Edit</button>
-                        </div>
-                        <div class="text-right">
-                            <button class="mt-2 mb-2 justify-self-right delete-btn" id="delete-btn-${id}" value="${id}">Delete</button>
+                        <div>
+                            <span class="float-left">
+                                <button class="ml-2 mt-2 mb-2 justify-self-right bg-primary edit-btn" id="edit-movie" value="${id}">Edit</button>
+                            </span>
+                            <span class="float-right">
+                                <button class="mr-2 mt-2 mb-2 justify-self-right bg-danger delete-btn" id="delete-movie" value="${id}">Delete</button>
+                            </span>    
                         </div>
                     </div>
                 </div>`
@@ -57,25 +54,106 @@
 
             });
         })
-    })
-        .catch((err) => {
-            console.log(err);
-        });
+            .catch((err) => {
+                console.log(err);
+            });
+        //DELETE FUNCTION
+        function deleteMovie(id) {
+            let options = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            return fetch(`${API_URL}/${id}`, options)
+                .then(() => location.reload())
+        }
+        //GET ONE MOVIE
+        const getOneMovie = (id) => {
+            return fetch(`${API_URL}/${id}`).then(resp => resp.json()).catch(err => console.error(err));
+        }
+    }
+    const API_URL = 'https://glen-hexagonal-microraptor.glitch.me/movies';
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => renderMovies(data));
 
-    //DELETE FUNCTION
-    function deleteMovie(id) {
+    // CREATING A MOVIE
+    $('#createmoviebtn').click(function (e) {
+        e.preventDefault();
+        if ($('#title').val() === '') {
+            alert('... what?')
+        } else {
+            let newMovie = {
+                title: $('#title').val().toLowerCase(),
+                rating: $('#rating').val(),
+            }
+            fetch(`http://www.omdbapi.com/?t=${newMovie.title}&apikey=${OMDB_KEY}`).then(resp => resp.json()).then(data => {
+                newMovie.poster = data.Poster;
+                newMovie.title = data.Title;
+                newMovie.year = data.Year;
+                newMovie.plot = data.Plot;
+                newMovie.genre = data.Genre;
+                newMovie.director = data.Director;
+                newMovie.actors= data.Actors;
+
+            }).then(() => {
+                console.log(newMovie.poster)
+                createMovie(newMovie).then(data => console.log(data))
+            })
+            // createMovie(newMovie).then(data => console.log(data))
+        }
+    })
+    const createMovie = (movie) => {
         let options = {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(movie)
         }
-        return fetch(`${API_URL}/${id}`, options)
+        return fetch(API_URL, options)
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                const dataArray = [];
+                dataArray.push(data);
+                renderMovies(dataArray);
+            })
+            .then(
+                $('#title').val(''),
+                $('#rating').val(''))
+
+            .catch(err => console.error(err));
     }
 
-    //GET ONE MOVIE
-    const getOneMovie = (id) => {
-        return fetch(`${API_URL}/${id}`).then(resp => resp.json()).catch(err => console.error(err));
-    }
+    $('#editmoviebtn').click(function (e){
+        e.preventDefault();
+        let movie = {
+
+            title: $('#title').val(),
+            rating: $('#rating').val(),
+            year: $('#year').val(),
+            genre: $('#genre').val(),
+            director: $('#director').val(),
+            plot: $('#plot').val(),
+            actors: $('#actors').val(),
+            id: $('#movieid').val()
+        }
+        let options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(movie)
+        }
+        $('.edit-btn').toggleClass('hidden');
+        $('.added-details').toggleClass('hidden');
+        $('#editmoviebtn').toggleClass('hidden');
+        $('#createmoviebtn').toggleClass('hidden');
+        console.log(movie.id);
+        return fetch(`${API_URL}/${movie.id}`,options).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.error(err))
+
+    })
 
 })();
