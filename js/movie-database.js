@@ -1,7 +1,6 @@
 "use strict";
 (() => {
     const moviesList = document.querySelector('#movies-container');
-    const dropdownStatus = document.querySelector('#dropdownStatus');
     let output = '';
     const renderMovies = (movies) => {
         $('#spinner').addClass('hidden');
@@ -57,27 +56,27 @@
                                                     <option value="10">10</option>
                                                 </select>
                                             </div>
-                                            <div class="added-details hidden">
+                                            <div class="added-details">
                                                 <label class="w-25 mt-2" for="year">YEAR:</label>
                                                 <input class="w-75" type="text" id="year">
                                             </div>
-                                            <div class="added-details hidden">
+                                            <div class="added-details">
                                                 <label class="w-25 mt-2" for="genre">GENRE:</label>
                                                 <input class="w-75" type="text" id="genre">
                                             </div>
-                                            <div class="added-details hidden">
+                                            <div class="added-details">
                                                 <label class="w-25 mt-2" for="director">DIRECTOR:</label>
                                                 <input class="w-75" type="text" id="director">
                                             </div>
-                                            <div class="added-details hidden">
+                                            <div class="added-details">
                                                 <label class="w-25 mt-2" for="actors">ACTORS:</label>
                                                 <input class="w-75" type="text" id="actors">
                                             </div>
-                                            <div class="added-details hidden">
+                                            <div class="added-details">
                                                 <label class="w-25 mt-2" for="plot">PLOT:</label>
                                                 <textarea class="w-75 p-0 m-0" type="textarea" id="plot"></textarea>
                                             </div>
-                                            <p id="movieid">MOVIE ID:</p>
+                                            <p id="movieId">MOVIE ID:</p>
                                         </form>
                                       </div>
                                       <div class="modal-footer">
@@ -115,13 +114,8 @@
                 $('#director').val(data.director);
                 $('#plot').val(data.plot);
                 $('#actors').val(data.actors);
-                $('#movieid').val(data.id);
-                console.log($('#movieid').val())
-                $('.added-details').toggleClass('hidden');
-                $('#createmoviebtn').toggleClass('hidden');
-                // $('#editmoviebtn').toggleClass('hidden');
-                // $('.card-footer').toggleClass('hidden');
-                // dropdownStatus.innerHTML = 'EDIT MOVIE'
+                $('#movieId').val(data.id);
+                console.log($('#movieId').val())
             })
                 .catch((err) => {
                     console.log(err);
@@ -154,7 +148,7 @@
                 director: $('#director').val(),
                 plot: $('#plot').val(),
                 actors: $('#actors').val(),
-                id: $('#movieid').val()
+                id: $('#movieId').val()
             }
             let options = {
                 method: 'PATCH',
@@ -163,11 +157,6 @@
                 },
                 body: JSON.stringify(movie)
             }
-            $('.added-details').toggleClass('hidden');
-            // $('#editmoviebtn').toggleClass('hidden');
-            $('#createmoviebtn').toggleClass('hidden');
-            // $('.card-footer').toggleClass('hidden');
-            // dropdownStatus.innerHTML = 'ADD MOVIE'
             console.log(movie.id);
             return fetch(`${API_URL}/${movie.id}`,options).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.error(err))
 
