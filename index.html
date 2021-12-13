@@ -10,67 +10,88 @@
     <link rel="stylesheet" href="css/css.css">
 </head>
 <body>
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand">MOVIES</a>
-    <form class="form-inline w-50">
-        <input class="form-control w-75 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn my-2 my-sm-0" type="submit">Search</button>
-    </form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">MOVIES</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    ADD MOVIE
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-item" href="#">
+                        <form action="">
+                            <div>
+                                <label class="w-25 mt-2" for="title">TITLE:</label>
+                                <input class="w-75" type="text" id="title"><br>
+                            </div>
+                            <div>
+                                <label class="w-25 mt-2" for="rating">RATING:</label>
+                                <select class="w-75 movieform" id="rating">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div class="added-details hidden">
+                                <label class="w-25 mt-2" for="year">YEAR:</label>
+                                <input class="w-75" type="text" id="year">
+                            </div>
+                            <div class="added-details hidden">
+                                <label class="w-25 mt-2" for="genre">GENRE:</label>
+                                <input class="w-75" type="text" id="genre">
+                            </div>
+                            <div class="added-details hidden">
+                                <label class="w-25 mt-2" for="director">DIRECTOR:</label>
+                                <input class="w-75" type="text" id="director">
+                            </div>
+                            <div class="added-details hidden">
+                                <label class="w-25 mt-2" for="actors">ACTORS:</label>
+                                <input class="w-75" type="text" id="actors">
+                            </div>
+                            <div class="added-details hidden">
+                                <label class="w-25 mt-2" for="plot">PLOT:</label>
+                                <textarea class="w-75 p-0 m-0" type="textarea" id="plot"></textarea>
+                            </div>
+                            <p id="movieid">MOVIE ID:</p>
+                        </form>
+                    </div>
+                    <hr>
+                    <div>
+                        <button class="mt-2 mb-2 dropdown-item" id="createmoviebtn">CREATE</button>
+                        <button class="mt-2 mb-2 dropdown-item hidden" id="editmoviebtn">EDIT</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
 </nav>
 <div class="main container-fluid">
     <div class="row">
-        <div class="col-3 m-0 p-" id="form">
-            <form action="">
-                <div>
-                    <label class="w-25 mt-2" for="title">TITLE:</label>
-                    <input class="w-100" type="text" id="title"><br>
-                </div>
-                <div>
-                    <label class="w-25 mt-2" for="rating">RATING:</label>
-                    <select class="w-100 movieform" id="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                <div class="added-details hidden">
-                    <label class="w-25 mt-2" for="year">YEAR:</label>
-                    <input class="w-100" type="text" id="year">
-                </div>
-                <div class="added-details hidden">
-                    <label class="w-25 mt-2" for="genre">GENRE:</label>
-                    <input class="w-100" type="text" id="genre">
-                </div>
-                <div class="added-details hidden">
-                    <label class="w-25 mt-2" for="director">DIRECTOR:</label>
-                    <input class="w-100" type="text" id="director">
-                </div>
-                <div class="added-details hidden">
-                    <label class="w-25 mt-2" for="actors">ACTORS:</label>
-                    <input class="w-100" type="text" id="actors">
-                </div>
-                <div class="added-details hidden">
-                    <label class="w-25 mt-2" for="plot">PLOT:</label>
-                    <textarea class="w-100 p-0 m-0" type="textarea" id="plot"></textarea>
-                </div>
-                <p id="movieid">MOVIE ID:</p>
-                <div>
-                    <button class="mt-2 mb-2" id="createmoviebtn">CREATE</button>
-                    <button class="mt-2 mb-2 hidden" id="editmoviebtn">EDIT</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="col-9 m-0 p-0">
+        <div class="col-12 m-0 p-0">
             <div class="card-columns" id="movies-container">
-                <div id="movies"></div>
+                <div id="movies">
+                    <div class="spinner-border text-warning" id="spinner" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -84,7 +105,8 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
 <!--JQUERY-->
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
 <!--CUSTOM-->
 <script src="js/keys.js"></script>
 <script src="js/movie-database.js"></script>
