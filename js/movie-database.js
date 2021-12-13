@@ -6,6 +6,7 @@
     }
 
     getAllMovies().then(response => {
+        $('#spinner').toggleClass('hidden');
         console.log(response);
         for (let movie of response) {
             console.log(movie.title)
