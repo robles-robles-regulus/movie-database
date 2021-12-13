@@ -20,7 +20,7 @@
                             <p class="card-text">${movie.plot}</p>
                         </div>
                         <div class="text-left">
-                            <button class="mt-2 mb-2 justify-self-right delete-btn" id="edit-btn-${id}" value="${id}">Edit</button>
+                            <button class="mt-2 mb-2 justify-self-right edit-btn" id="edit-btn-${id}" value="${id}">Edit</button>
                         </div>
                         <div class="text-right">
                             <button class="mt-2 mb-2 justify-self-right delete-btn" id="delete-btn-${id}" value="${id}">Delete</button>
@@ -30,10 +30,31 @@
             $('#movies').append(output)
         }
         //CALLING THE DELETE BUTTON FUNCTION ONCE CLICKED ON DELETE-BTN
-        $(".delete-btn" ).click(function (e) {
+        $(".delete-btn").click(function (e) {
             e.preventDefault();
             console.log(this.value)
             deleteMovie(this.value).then(data => console.log(data))
+        })
+        //CALLING THE EDIT BUTTON FUNCTION - THIS FIRST FUNCTION IS THE ONE THAT FILLS OUT THE FORM
+        $('.edit-btn').click(function () {
+
+            getOneMovie(this.value).then(data => {
+                console.log(data);
+                $('#title').val(data.title);
+                $('#rating').val(data.rating);
+                $('#year').val(data.year);
+                $('#genre').val(data.genre);
+                $('#director').val(data.director);
+                $('#plot').val(data.plot);
+                $('#actors').val(data.actors);
+                $('#movieid').val(data.id);
+                console.log($('#movieid').val())
+                $('.added-details').toggleClass('hidden');
+                $('#createmoviebtn').toggleClass('hidden');
+                $('#editmoviebtn').toggleClass('hidden');
+                $('.edit-btn').toggleClass('hidden')
+
+            });
         })
     })
         .catch((err) => {
@@ -41,14 +62,19 @@
         });
 
     //DELETE FUNCTION
-function deleteMovie(id) {
-    let options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
+    function deleteMovie(id) {
+        let options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }
+        return fetch(`${API_URL}/${id}`, options)
     }
-    return fetch(`${API_URL}/${id}`, options)
-}
+
+    //GET ONE MOVIE
+    const getOneMovie = (id) => {
+        return fetch(`${API_URL}/${id}`).then(resp => resp.json()).catch(err => console.error(err));
+    }
 
 })();
