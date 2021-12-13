@@ -11,7 +11,7 @@
             output +=
 
                 `
-                    <div class="card mb-2 ml-2" style="width: 18rem;">
+                    <div class="card m-2" style="width: 18rem;">
                         <img src="${movie.poster}" height="250" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title text-capitalize">${movie.title}</h5>
@@ -51,11 +51,6 @@
                 $('#actors').val(data.actors);
                 $('#movieid').val(data.id);
                 console.log($('#movieid').val())
-                $('.added-details').toggleClass('hidden');
-                $('#createmoviebtn').toggleClass('hidden');
-                $('#editmoviebtn').toggleClass('hidden');
-                $('.card-footer').toggleClass('hidden');
-                dropdownStatus.innerHTML = 'EDIT MOVIE'
             })
                 .catch((err) => {
                     console.log(err);
@@ -151,11 +146,7 @@
             },
             body: JSON.stringify(movie)
         }
-        $('.added-details').toggleClass('hidden');
-        $('#editmoviebtn').toggleClass('hidden');
-        $('#createmoviebtn').toggleClass('hidden');
-        $('.card-footer').toggleClass('hidden');
-        dropdownStatus.innerHTML = 'ADD MOVIE'
+
         console.log(movie.id);
         return fetch(`${API_URL}/${movie.id}`,options).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.error(err))
 
