@@ -1,6 +1,8 @@
 "use strict";
 (() => {
+
     const renderMovies = (movies) => {
+      $('#spinner').toggleClass('hidden');
         for(let movie of movies){
             console.log(movie.title)
             let id = movie.id;
