@@ -12,31 +12,57 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">MOVIES</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFormModal">
+        ADD A MOVIE
     </button>
+    <!-- Modal -->
+    <div class="modal fade" id="addFormModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ADD MOVIE</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div>
+                            <label class="w-25 mt-2" for="title">TITLE:</label>
+                            <input class="w-75" type="text" id="title"><br>
+                        </div>
+                        <div>
+                            <label class="w-25 mt-2" for="rating">RATING:</label>
+                            <select class="w-75 movieform" id="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
-<div class="main container-fluid">
-    <div class="row">
-        <div class="col-12 m-0">
-            <div class="row justify-content-center" id="movies-container">
-                <div id="movies">
-                    <div class="spinner-border text-warning" id="spinner" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="createmoviebtn">CREATE
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
+</nav>
+<div class="main container-fluid ">
+    <div class="row m-0 justify-content-center" id="movies-container">
+        <div id="movies">
+            <div class="spinner-border text-warning" id="spinner" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
 </div>
 <!--BOOTSTRAP-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

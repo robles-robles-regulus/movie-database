@@ -10,7 +10,7 @@
             output +=
 
                 `
-                    <div class="card mb-2 ml-2" style="width: 18rem;">
+                    <div class="card m-2" style="width: 18rem;">
                         <img src="${movie.poster}" height="250" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title text-capitalize">${movie.title}</h5>
@@ -219,7 +219,5 @@
 
             .catch(err => console.error(err));
     }
-
-
 
 })();
