@@ -81,7 +81,7 @@
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" id="editMovieBtn">Update</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="editMovieBtn">Update</button>
                                       </div>
                                     </div>
                                   </div>
@@ -158,7 +158,10 @@
                 body: JSON.stringify(movie)
             }
             console.log(movie.id);
-            return fetch(`${API_URL}/${movie.id}`,options).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.error(err))
+            return fetch(`${API_URL}/${movie.id}`,options)
+                .then(resp => resp.json())
+                .then(data => console.log(data))
+                .catch(err => console.error(err))
 
         })
 
