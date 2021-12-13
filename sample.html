@@ -9,30 +9,69 @@
 
 </head>
 <body>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+    Edit
+</button>
 
-<div class="card-deck">
-    <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>
-    <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>
-    <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div>
+                        <label class="w-25 mt-2" for="title">TITLE:</label>
+                        <input class="w-75" type="text" id="title"><br>
+                    </div>
+                    <div>
+                        <label class="w-25 mt-2" for="rating">RATING:</label>
+                        <select class="w-75 movieForm" id="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="added-details hidden">
+                        <label class="w-25 mt-2" for="year">YEAR:</label>
+                        <input class="w-75" type="text" id="year">
+                    </div>
+                    <div class="added-details hidden">
+                        <label class="w-25 mt-2" for="genre">GENRE:</label>
+                        <input class="w-75" type="text" id="genre">
+                    </div>
+                    <div class="added-details hidden">
+                        <label class="w-25 mt-2" for="director">DIRECTOR:</label>
+                        <input class="w-75" type="text" id="director">
+                    </div>
+                    <div class="added-details hidden">
+                        <label class="w-25 mt-2" for="actors">ACTORS:</label>
+                        <input class="w-75" type="text" id="actors">
+                    </div>
+                    <div class="added-details hidden">
+                        <label class="w-25 mt-2" for="plot">PLOT:</label>
+                        <textarea class="w-75 p-0 m-0" type="textarea" id="plot"></textarea>
+                    </div>
+                    <p id="movieid">MOVIE ID:</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">UPDATE</button>
+            </div>
         </div>
     </div>
 </div>

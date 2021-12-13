@@ -6,11 +6,11 @@ body {
     background-color: darkslateblue;
 }
 
-.movieform {
+.movieForm {
     height: 30px; !important;
 }
 
-#movieid {
+#movieId {
     display: none;
 }
 
@@ -18,15 +18,15 @@ body {
     display: none;
 }
 
-.propertyform {
+.propertyForm {
     width: 20%;
 }
 
-.valueform {
+.valueForm {
     width: 70%;
 }
 
-#movieform {
+#movieForm {
     padding-left: 24px;
     padding-right: 24px;
 }
