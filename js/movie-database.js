@@ -20,7 +20,73 @@
                         </div>
                         <div class="card-footer">
                             <span class="float-left">
-                                <button class="ml-2 mt-2 mb-2 justify-self-right bg-primary edit-btn" id="edit-movie" value="${id}">Edit</button>
+<!--                                <button class="ml-2 mt-2 mb-2 justify-self-right bg-primary edit-btn" id="edit-movie" value="${id}">Edit</button>-->
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#staticBackdrop" value="${id}">
+                                  Edit
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form action="">
+                                            <div>
+                                                <label class="w-25 mt-2" for="title">TITLE:</label>
+                                                <input class="w-75" type="text" id="title"><br>
+                                            </div>
+                                            <div>
+                                                <label class="w-25 mt-2" for="rating">RATING:</label>
+                                                <select class="w-75 movieform" id="rating">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                            <div class="added-details hidden">
+                                                <label class="w-25 mt-2" for="year">YEAR:</label>
+                                                <input class="w-75" type="text" id="year">
+                                            </div>
+                                            <div class="added-details hidden">
+                                                <label class="w-25 mt-2" for="genre">GENRE:</label>
+                                                <input class="w-75" type="text" id="genre">
+                                            </div>
+                                            <div class="added-details hidden">
+                                                <label class="w-25 mt-2" for="director">DIRECTOR:</label>
+                                                <input class="w-75" type="text" id="director">
+                                            </div>
+                                            <div class="added-details hidden">
+                                                <label class="w-25 mt-2" for="actors">ACTORS:</label>
+                                                <input class="w-75" type="text" id="actors">
+                                            </div>
+                                            <div class="added-details hidden">
+                                                <label class="w-25 mt-2" for="plot">PLOT:</label>
+                                                <textarea class="w-75 p-0 m-0" type="textarea" id="plot"></textarea>
+                                            </div>
+                                            <p id="movieid">MOVIE ID:</p>
+                                        </form>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="editMovieBtn">Update</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                             </span>
                             <span class="float-right">
                                 <button class="mr-2 mt-2 mb-2 justify-self-right bg-danger delete-btn" id="delete-movie${id}" value="${id}">Delete</button>
@@ -53,9 +119,9 @@
                 console.log($('#movieid').val())
                 $('.added-details').toggleClass('hidden');
                 $('#createmoviebtn').toggleClass('hidden');
-                $('#editmoviebtn').toggleClass('hidden');
-                $('.card-footer').toggleClass('hidden');
-                dropdownStatus.innerHTML = 'EDIT MOVIE'
+                // $('#editmoviebtn').toggleClass('hidden');
+                // $('.card-footer').toggleClass('hidden');
+                // dropdownStatus.innerHTML = 'EDIT MOVIE'
             })
                 .catch((err) => {
                     console.log(err);
@@ -76,6 +142,37 @@
         const getOneMovie = (id) => {
             return fetch(`${API_URL}/${id}`).then(resp => resp.json()).catch(err => console.error(err));
         }
+
+        $('#editMovieBtn').click(function (e){
+            e.preventDefault();
+            console.log("clicking")
+            let movie = {
+                title: $('#title').val(),
+                rating: $('#rating').val(),
+                year: $('#year').val(),
+                genre: $('#genre').val(),
+                director: $('#director').val(),
+                plot: $('#plot').val(),
+                actors: $('#actors').val(),
+                id: $('#movieid').val()
+            }
+            let options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(movie)
+            }
+            $('.added-details').toggleClass('hidden');
+            // $('#editmoviebtn').toggleClass('hidden');
+            $('#createmoviebtn').toggleClass('hidden');
+            // $('.card-footer').toggleClass('hidden');
+            // dropdownStatus.innerHTML = 'ADD MOVIE'
+            console.log(movie.id);
+            return fetch(`${API_URL}/${movie.id}`,options).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.error(err))
+
+        })
+
     }
     const API_URL = 'https://glen-hexagonal-microraptor.glitch.me/movies';
     fetch(API_URL)
@@ -131,34 +228,6 @@
             .catch(err => console.error(err));
     }
 
-    $('#editmoviebtn').click(function (e){
-        e.preventDefault();
-        let movie = {
 
-            title: $('#title').val(),
-            rating: $('#rating').val(),
-            year: $('#year').val(),
-            genre: $('#genre').val(),
-            director: $('#director').val(),
-            plot: $('#plot').val(),
-            actors: $('#actors').val(),
-            id: $('#movieid').val()
-        }
-        let options = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movie)
-        }
-        $('.added-details').toggleClass('hidden');
-        $('#editmoviebtn').toggleClass('hidden');
-        $('#createmoviebtn').toggleClass('hidden');
-        $('.card-footer').toggleClass('hidden');
-        dropdownStatus.innerHTML = 'ADD MOVIE'
-        console.log(movie.id);
-        return fetch(`${API_URL}/${movie.id}`,options).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.error(err))
-
-    })
 
 })();
