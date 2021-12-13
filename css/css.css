@@ -9,3 +9,15 @@
 .movieform {
     height: 30px; !important;
 }
+
+#movieid {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+/*.visible {*/
+/*    visibility: visible;*/
+/*}*/
