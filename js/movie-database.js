@@ -19,8 +19,6 @@
                         </div>
                         <div class="card-footer">
                             <span class="float-left">
-<!--                                <button class="ml-2 mt-2 mb-2 justify-self-right bg-primary edit-btn" id="edit-movie" value="${id}">Edit</button>-->
-                                <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#staticBackdrop" value="${id}">
                                   Edit
                                 </button>
@@ -30,7 +28,6 @@
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
@@ -38,12 +35,12 @@
                                       <div class="modal-body">
                                         <form action="">
                                             <div>
-                                                <label class="w-25 mt-2" for="title">TITLE:</label>
-                                                <input class="w-75" type="text" id="title"><br>
+                                                <label class="w-25 mt-2" for="editedTitle">TITLE:</label>
+                                                <input class="w-75" type="text" id="editedTitle"><br>
                                             </div>
                                             <div>
-                                                <label class="w-25 mt-2" for="rating">RATING:</label>
-                                                <select class="w-75 movieform" id="rating">
+                                                <label class="w-25 mt-2" for="EditedRating">RATING:</label>
+                                                <select class="w-75 movieform" id="EditedRating">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -88,7 +85,7 @@
                                 </div>
                             </span>
                             <span class="float-right">
-                                <button class="mr-2 mt-2 mb-2 justify-self-right bg-danger delete-btn" id="delete-movie${id}" value="${id}">Delete</button>
+                                <button class="btn btn-danger delete-btn" id="delete-movie${id}" value="${id}">Delete</button>
                             </span>    
                         </div>
                     </div>
@@ -107,8 +104,8 @@
             getOneMovie(this.value).then(data => {
                 e.preventDefault();
                 console.log(data);
-                $('#title').val(data.title);
-                $('#rating').val(data.rating);
+                $('#editedTitle').val(data.title);
+                $('#editedRating').val(data.rating);
                 $('#year').val(data.year);
                 $('#genre').val(data.genre);
                 $('#director').val(data.director);
@@ -141,8 +138,8 @@
             e.preventDefault();
             console.log("clicking")
             let movie = {
-                title: $('#title').val(),
-                rating: $('#rating').val(),
+                title: $('#editedTitle').val(),
+                rating: $('#editedRating').val(),
                 year: $('#year').val(),
                 genre: $('#genre').val(),
                 director: $('#director').val(),
@@ -172,7 +169,7 @@
         .then(data => renderMovies(data));
 
     // CREATING A MOVIE
-    $('#createmoviebtn').click(function (e) {
+    $('#createMovieBtn').click(function (e) {
         e.preventDefault();
         if ($('#title').val() === '') {
             alert('... what?')
@@ -213,10 +210,6 @@
                 dataArray.push(data);
                 renderMovies(dataArray);
             })
-            .then(
-                $('#title').val(''),
-                $('#rating').val(''))
-
             .catch(err => console.error(err));
     }
 
