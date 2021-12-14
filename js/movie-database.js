@@ -19,8 +19,8 @@
                         </div>
                         <div class="card-footer">
                             <span class="float-left">
-                                <button type="button" class="btn btn-primary edit-btn" data-toggle="modal" data-target="#staticBackdrop" value="${id}">
-                                  Edit
+                                <button type="button" class="btn btn-secondary edit-btn" data-toggle="modal" data-target="#staticBackdrop" value="${id}">
+                                  <i class="fas fa-edit"></i>
                                 </button>
                                 
                                 <!-- Modal -->
@@ -85,7 +85,7 @@
                                 </div>
                             </span>
                             <span class="float-right">
-                                <button class="btn btn-danger delete-btn" id="delete-movie${id}" value="${id}">Delete</button>
+                                <button class="btn btn-danger delete-btn" id="delete-movie${id}" value="${id}"><i class="fas fa-trash-alt"></i></button>
                             </span>    
                         </div>
                     </div>
