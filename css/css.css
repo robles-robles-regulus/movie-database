@@ -1,10 +1,24 @@
-#form {
-    background-color: darkslategrey;
+body{
+    background-color: #746F6D;
+}
+.card{
+    background-color: #454545;
+    color: white;
+    border: 1px #343332 solid;
+
+}
+.modal-body{
+    color: black;
 }
 
-body {
-    background-color: darkslateblue;
+.edit-btn{
+    background-color: #637092;
 }
+
+.delete-btn{
+    background-color: #cb4c4e;
+}
+
 
 .movieForm {
     height: 30px; !important;
